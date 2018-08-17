@@ -64,7 +64,7 @@ if(ENABLE_OPENAL)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DENABLE_OPENAL")
   # NOTE: Linux/Mac OpenAL support not yet implemented!
   if(MSVC)
-    include_directories(../ext/OpenAL/include)
+    include_directories(../dependencies/OpenAL/include)
   else()
     find_package(OpenAL)
     include_directories(${OPENAL_INCLUDE_DIR})
@@ -143,8 +143,8 @@ set(GORILLA_COMMON_SRC
   )
   
 # OGG/Vorbis
-set(LIBOGGDIR ../ext/libogg)
-set(LIBVORBISDIR ../ext/libvorbis)
+set(LIBOGGDIR ../dependencies/libogg)
+set(LIBVORBISDIR ../dependencies/libvorbis)
 
 include_directories(${LIBOGGDIR}/include)
 include_directories(${LIBVORBISDIR}/include)
@@ -218,7 +218,7 @@ add_library(gorilla STATIC
 if(ENABLE_OPENAL)
   # NOTE: Linux/Mac OpenAL support not yet implemented!
   if(MSVC)
-    target_link_libraries(gorilla ${CMAKE_CURRENT_SOURCE_DIR}/../ext/OpenAL/libs/Win32/OpenAL32.lib)
+    target_link_libraries(gorilla ${CMAKE_CURRENT_SOURCE_DIR}/../dependencies/OpenAL/libs/Win32/OpenAL32.lib)
   else()
     target_link_libraries(gorilla ${OPENAL_LIBRARY})
   endif()
