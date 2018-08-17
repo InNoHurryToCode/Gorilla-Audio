@@ -141,7 +141,7 @@ ga_StreamManager* ga_stream_manager_create()
 }
 gaX_StreamLink* gaX_stream_manager_add(ga_StreamManager* in_mgr, ga_BufferedStream* in_stream)
 {
-  gaX_StreamLink* streamLink = gaX_stream_link_create(in_stream);
+  gaX_StreamLink* streamLink = gaX_stream_link_create();
   gaX_stream_link_acquire(streamLink); /* The new client adds its own refcount */
   /* It's safe to add() while iterating in stream() because of implicit fault tolerance */
   /* That is, all possible outcomes are valid, despite the race condition */
