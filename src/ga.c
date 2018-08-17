@@ -766,8 +766,9 @@ void gaX_mixer_mix_buffer(ga_Mixer* in_mixer,
       while(i < numToFill * (gc_int32)mixerChannels && srcBytes >= 2 * srcChannels)
       {
         gc_int32 newJ, deltaSrcBytes;
-        dst[i] += (gc_int32)((gc_int32)src[j] * gain * (1.0f - pan) * 2);
-        dst[i + 1] += (gc_int32)((gc_int32)src[j + ((srcChannels == 1) ? 0 : 1)] * gain * pan * 2);
+		gc_float32 lmul = gain * (pan < 0.5 ? 1 : (1 - pan) * 2);
+		gc_float32 rmul = gain * (pan > 0.5 ? 1 : pan * 2); dst[i] += (gc_int32)((gc_int32)src[j] * lmul);
+		dst[i + 1] += (gc_int32)((gc_int32)src[j + ((srcChannels == 1) ? 0 : 1)] * rmul);
         i += mixerChannels;
         fj += sampleScale * srcChannels;
         srcSamplesRead += sampleScale * srcChannels;
